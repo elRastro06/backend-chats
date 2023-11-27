@@ -71,9 +71,11 @@ app.post('/chat/:chatId/message', async (req, res) => {
     }
 
     const result = await chats.updateOne(
-      { chatId },
+      { _id: new ObjectId(chatId) },
       { $push: { messages: { sender, content, timestamp } } }
     );
+
+    
 
     if (result.modifiedCount === 0) {
       res.status(404).send({ error: 'Chat not found' });
