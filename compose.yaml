@@ -1,7 +1,0 @@
-version: '3.1'
-services:
-  chats:
-    build: .
-    container_name: chats
-    ports:
-      - 5007:5007
