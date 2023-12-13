@@ -75,8 +75,6 @@ app.post('/chat/:chatId/message', async (req, res) => {
       { $push: { messages: { sender, content, timestamp } } }
     );
 
-    
-
     if (result.modifiedCount === 0) {
       res.status(404).send({ error: 'Chat not found' });
       return;
@@ -84,6 +82,7 @@ app.post('/chat/:chatId/message', async (req, res) => {
 
     res.status(201).send({ message: 'Message sent successfully' });
   } catch (e) {
+    console.log("Error");
     res.status(500).send({ error: 'Internal Server Error' });
   }
 });
