@@ -28,6 +28,8 @@ const verifyToken = async (req, res, next) => {
     else if (req.params.chatId != undefined) {
         const chat = await chats.findOne({_id: new ObjectId(req.params.chatId)});
         if(user._id != chat.participants[0] && user._id != chat.participants[1]) res.status(402).send("Unauthorized action");
+    } else if (req.method == 'POST') {
+        if(user._id != req.body.seller && user._id != req.body.user) res.status(402).send("Unauthorized action");
     }
 
     next();
