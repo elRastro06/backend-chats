@@ -17,11 +17,11 @@ app.listen(port, () => {
   console.log(`Now listening on port ${port}`);
 });
 
-const clients = process.env.CLIENTS != undefined ? process.env.CLIENTS : "localhost";
+const clients = process.env.CLIENTS_URL;
 
 const verifyToken = async (req, res, next) => {
   try {
-    const response = await axios.get(`http://${clients}:5000/checkToken/${req.headers.authorization}`);
+    const response = await axios.get(`${clients}/checkToken/${req.headers.authorization}`);
     const user = response.data.user;
 
     if (req.params.userId != undefined && req.params.userId != user._id) {
